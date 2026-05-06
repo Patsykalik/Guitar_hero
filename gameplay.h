@@ -8,7 +8,6 @@
 #include <QColor>
 #include <QPixmap>
 
-// Константы и настройки (переносим сюда для удобства)
 const int VIEW_WIDTH = 800;
 const int VIEW_HEIGHT = 600;
 
@@ -19,7 +18,6 @@ struct GameConfig {
 };
 extern GameConfig globalConfig;
 
-// Графические элементы
 class GuitarPlayer : public QGraphicsObject {
     Q_OBJECT
 public:
@@ -62,7 +60,6 @@ public:
     QPixmap sprite;
 };
 
-// Сам игровой виджет
 class GameWidget : public QWidget {
     Q_OBJECT
 public:
@@ -70,21 +67,26 @@ public:
     void startGame();
 signals:
     void returnToMenu();
+protected:
+    void keyPressEvent(class QKeyEvent *event) override; 
 private slots:
     void updatePhysics();
     void spawnNote();
     void stopGame();
 private:
     void drawFretboard();
+    void checkHit(int stringIdx);
     class QGraphicsScene *scene;
     class QGraphicsView *view;
     QTimer *gameTimer;
     QTimer *spawnTimer;
     class QLabel *countdownLabel;
-    int countdownValue;
+    class QLabel *scoreLabel;
+    int score = 0;
     class QMediaPlayer *mediaPlayer;
     class QAudioOutput *audioOutput;
     QList<GameNoteSprite*> notes;
+    int countdownValue;
 };
 
 #endif
