@@ -240,11 +240,12 @@ void GameWidget::generateBeatMap()
 
     if (globalConfig.selectedSong == "Zhit_v_kayf.mp3") {
 
-        int beat = 652;
+        int beat = 900;
         int current = 5000;
 
         QList<int> pattern = {
             0,1,2,3,1,2,0,3,
+            
             0,2,1,3,2,1,0,3
         };
 
@@ -268,7 +269,7 @@ void GameWidget::generateBeatMap()
 
     } else if (globalConfig.selectedSong == "Freedom.mp3") {
 
-        int beat=500;
+        int beat=450;
         int current=2500;
 
         QList<int> pattern = {
@@ -296,7 +297,7 @@ void GameWidget::generateBeatMap()
 
     } else if (globalConfig.selectedSong == "Don_Omar.mp3") {
 
-        int beat=462;
+        int beat=300;
         int current=1800;
 
         QList<int> pattern = {
