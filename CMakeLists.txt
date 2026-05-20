@@ -33,21 +33,25 @@ target_link_libraries(GuitarHeroClone PRIVATE
     Qt6::Sql
 )
 
-add_custom_command(TARGET GuitarHeroClone POST_BUILD
-
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    "${CMAKE_SOURCE_DIR}/Zhit_v_kayf.mp3"
-    "$<TARGET_FILE_DIR:GuitarHeroClone>/Zhit_v_kayf.mp3"
-
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    "${CMAKE_SOURCE_DIR}/Freedom.mp3"
-    "$<TARGET_FILE_DIR:GuitarHeroClone>/Freedom.mp3"
-
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    "${CMAKE_SOURCE_DIR}/Don_Omar.mp3"
-    "$<TARGET_FILE_DIR:GuitarHeroClone>/Don_Omar.mp3"
-
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    "${CMAKE_SOURCE_DIR}/3ae8bceb83287ebf54c46b101eafd361.jpg"
-    "$<TARGET_FILE_DIR:GuitarHeroClone>/3ae8bceb83287ebf54c46b101eafd361.jpg"
+target_compile_options(GuitarHeroClone PRIVATE
+    -Wall
+    -Wextra
 )
+
+set(ASSETS
+    Zhit_v_kayf.mp3
+    Freedom.mp3
+    Don_Omar.mp3
+    3ae8bceb83287ebf54c46b101eafd361.jpg
+)
+
+foreach(FILE ${ASSETS})
+
+    add_custom_command(
+        TARGET GuitarHeroClone POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_SOURCE_DIR}/${FILE}
+        $<TARGET_FILE_DIR:GuitarHeroClone>/${FILE}
+    )
+
+endforeach()
